@@ -3,13 +3,15 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 	str "strings"
 )
 
-// struct guildName {
-// 	name string
-// 	votes int
-// }
+type guildName struct {
+	name  string
+	votes int
+}
+
 var votesMap = map[string]int{}
 
 func processResponse(response string) {
@@ -28,11 +30,8 @@ func processResponse(response string) {
 }
 
 func main() {
-	fmt.Println("Hello World!")
-	fmt.Println("change test!")
-
 	// my response (not in spreadsheet)
-	processResponse("Oh Hi Mark [Hi], Nice Outfit [Dork], Bad At Guildwars [BAG], Keyboard Gremlins [POG], Five Finger Discount [Mine], The Danny Devitos [Egg], Todd Howard Ate My Son [WTF], Here comes treble  [Clef], I Want a Real Mount ANet   [HORS], We love Max   [Gay]")
+	// processResponse("Oh Hi Mark [Hi], Nice Outfit [Dork], Bad At Guildwars [BAG], Keyboard Gremlins [POG], Five Finger Discount [Mine], The Danny Devitos [Egg], Todd Howard Ate My Son [WTF], Here comes treble  [Clef], I Want a Real Mount ANet   [HORS], We love Max   [Gay]")
 
 	// responses in spreadsheet
 	rawInput :=
@@ -48,6 +47,17 @@ Nice Outfit [Dork], The Dinkster [Wink], Order of the White Lotus [Pai], Give Us
 		test = append(test, rand.Intn(10))
 	}
 
-	fmt.Println(votesMap)
-	fmt.Println("\n", test)
+	var result []guildName
+	for k, v := range votesMap {
+		result = append(result, guildName{name: k, votes: v})
+	}
+
+	sort.Slice(result, func(i, j int) bool { return result[i].votes > result[j].votes })
+
+	for _, v := range result {
+		fmt.Printf("%v:\t%v\n", v.name, v.votes)
+	}
+	// fmt.Println(result)
+	// fmt.Println(votesMap)
+	// fmt.Println(len("Washed League Players Association [FEED]:"))
 }
