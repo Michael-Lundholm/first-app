@@ -57,6 +57,7 @@ Nice Outfit [Dork], The Dinkster [Wink], Order of the White Lotus [Pai], Give Us
 	for _, v := range result {
 		fmt.Printf("%v:\t%v\n", v.name, v.votes)
 	}
+
 	// fmt.Println(result)
 	// fmt.Println(votesMap)
 	// fmt.Println(len("Washed League Players Association [FEED]:"))
