@@ -55,10 +55,12 @@ Nice Outfit [Dork], The Dinkster [Wink], Order of the White Lotus [Pai], Give Us
 	sort.Slice(result, func(i, j int) bool { return result[i].votes > result[j].votes })
 
 	for _, v := range result {
-		fmt.Printf("%v:\t%v\n", v.name, v.votes)
+		for len(v.name) < 40 {
+			v.name += "."
+		}
+		fmt.Printf("%v: %v\n", v.name, v.votes)
 	}
 
 	// fmt.Println(result)
 	// fmt.Println(votesMap)
-	// fmt.Println(len("Washed League Players Association [FEED]:"))
 }
